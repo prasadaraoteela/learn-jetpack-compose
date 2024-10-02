@@ -3,8 +3,6 @@ package me.prasad.jetpack.compose.ui.screen
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Home
 import androidx.compose.material3.Text
@@ -30,9 +28,9 @@ fun Section(section: Section, modifier: Modifier = Modifier) {
             style = Typography.titleLarge,
         )
 
-        LazyColumn {
-            items(section.tiles) {
-                Tile(tile = it)
+        Column {
+            section.tiles.forEach { tile ->
+                Tile(tile = tile)
             }
         }
 
