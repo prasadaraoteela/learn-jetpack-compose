@@ -11,13 +11,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SectionViewModel @Inject constructor(
-    private val repository: SectionRepository
+  repository: SectionRepository
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(SectionUiState())
-    val uiState: StateFlow<SectionUiState> = _uiState.asStateFlow()
+  private val _uiState = MutableStateFlow(SectionUiState())
+  val uiState: StateFlow<SectionUiState> = _uiState.asStateFlow()
 
-    init {
-        _uiState.value = SectionUiState(sections = repository.fetchSections())
-    }
+  init {
+    _uiState.value = SectionUiState(sections = repository.fetchSections())
+  }
 }

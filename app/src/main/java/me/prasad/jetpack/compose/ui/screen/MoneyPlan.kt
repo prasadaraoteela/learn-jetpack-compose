@@ -13,15 +13,15 @@ import me.prasad.jetpack.compose.ui.viewmodel.SectionViewModel
 @Preview(showBackground = true)
 @Composable
 fun MoneyPlan(
-    modifier: Modifier = Modifier,
-    sectionViewModel: SectionViewModel = viewModel()
+  modifier: Modifier = Modifier,
+  sectionViewModel: SectionViewModel = viewModel()
 ) {
 
-    val state by sectionViewModel.uiState.collectAsState()
+  val state by sectionViewModel.uiState.collectAsState()
 
-    LazyColumn(modifier = modifier) {
-        items(state.sections) { section ->
-            Section(section = section)
-        }
+  LazyColumn(modifier = modifier) {
+    items(state.sections) { section ->
+      Section(section = section)
     }
+  }
 }

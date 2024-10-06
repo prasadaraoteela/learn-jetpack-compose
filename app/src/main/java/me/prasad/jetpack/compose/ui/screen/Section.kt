@@ -17,45 +17,45 @@ import me.prasad.jetpack.compose.ui.theme.Typography
 @Composable
 fun Section(section: Section, modifier: Modifier = Modifier) {
 
-    Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(16.dp)
-    ) {
+  Column(
+    modifier = modifier
+        .fillMaxWidth()
+        .padding(16.dp)
+  ) {
 
-        Text(
-            text = section.title,
-            style = Typography.titleLarge,
-        )
+    Text(
+      text = section.title,
+      style = Typography.titleLarge,
+    )
 
-        Column {
-            section.tiles.forEach { tile ->
-                Tile(tile = tile)
-            }
-        }
-
+    Column {
+      section.tiles.forEach { tile ->
+        Tile(tile = tile)
+      }
     }
+
+  }
 
 }
 
 @Preview(showBackground = true)
 @Composable
 private fun SectionPreview() {
-    Section(
-        section = Section(
-            title = "Money Management",
-            tiles = listOf(
-                Tile(
-                    title = "Cash Flow View",
-                    description = "Get a clear picture of your finances with Cash Flow View! Track your income and expenses, identify spending patterns, and make informed financial decisions.",
-                    icon = Icons.Rounded.Home
-                ),
-                Tile(
-                    title = "Cash Flow View",
-                    description = "Get a clear picture of your finances with Cash Flow View! Track your income and expenses, identify spending patterns, and make informed financial decisions.",
-                    icon = Icons.Rounded.Home
-                )
-            )
+  Section(
+    section = Section(
+      title = "Money Management",
+      tiles = listOf(
+        Tile(
+          title = "Cash Flow View",
+          description = "Get a clear picture of your finances with Cash Flow View! Track your income and expenses, identify spending patterns, and make informed financial decisions.",
+          icon = Icons.Rounded.Home
+        ),
+        Tile(
+          title = "Cash Flow View",
+          description = "Get a clear picture of your finances with Cash Flow View! Track your income and expenses, identify spending patterns, and make informed financial decisions.",
+          icon = Icons.Rounded.Home
         )
+      )
     )
+  )
 }

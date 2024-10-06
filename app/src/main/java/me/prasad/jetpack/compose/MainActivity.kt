@@ -14,17 +14,17 @@ import me.prasad.jetpack.compose.ui.theme.LearnJetpackComposeTheme
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            LearnJetpackComposeTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    MoneyPlan(
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    enableEdgeToEdge()
+    setContent {
+      LearnJetpackComposeTheme {
+        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+          MoneyPlan(
+            modifier = Modifier.padding(innerPadding)
+          )
         }
+      }
     }
+  }
 }
