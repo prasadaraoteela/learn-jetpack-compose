@@ -8,6 +8,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
+import me.prasad.jetpack.compose.data.model.Answer
 import me.prasad.jetpack.compose.ui.viewmodel.SectionViewModel
 
 @Preview(showBackground = true)
@@ -21,7 +22,7 @@ fun MoneyPlan(
 
   LazyColumn(modifier = modifier) {
     items(state.sections) { section ->
-      Section(section = section)
+      SurveyAnswer(answer = Answer(title = section.title))
     }
   }
 }
