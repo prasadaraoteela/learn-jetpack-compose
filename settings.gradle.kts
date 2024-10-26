@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "Learn Jetpack Compose"
 include(":app")
 include(":compose-migration")
+include(":layouts")
