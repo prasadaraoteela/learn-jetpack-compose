@@ -19,7 +19,10 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Learn Jetpack Compose"
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
+rootProject.name = "learn-jetpack-compose"
 include(":app")
 include(":compose-migration")
 include(":layouts")
+include(":core:network")

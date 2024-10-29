@@ -59,12 +59,22 @@ dependencies {
   implementation(libs.androidx.ui.tooling.preview)
   implementation(libs.androidx.material3)
   implementation(libs.androidx.lifecycle.viewmodel.compose)
-  implementation(libs.hilt)
   implementation(libs.androidx.ui.text.google.fonts)
+
+  // HILT dependency injection
+  implementation(libs.hilt)
   ksp(libs.hilt.compiler)
 
+  // Retrofit network library
   implementation(libs.retrofit)
   implementation(libs.retrofit.gson.converter)
+
+  // Network module
+  implementation(projects.core.network)
+
+  // Coil image loading library
+  implementation(libs.coil.compose)
+  implementation(libs.coil.http)
 
   testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.junit)
