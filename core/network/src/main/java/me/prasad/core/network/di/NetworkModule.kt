@@ -16,7 +16,7 @@ class NetworkModule {
   @Singleton
   @Provides
   fun provideRetrofit(): Retrofit = Retrofit.Builder()
-    .baseUrl("http://localhost:3000/")
+    .baseUrl("https://jsonplaceholder.typicode.com/")
     .addConverterFactory(GsonConverterFactory.create())
     .build()
 

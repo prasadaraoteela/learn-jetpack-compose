@@ -1,5 +1,7 @@
 package me.prasad.compose.layouts.ui.screen
 
+import android.content.res.Configuration
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -26,8 +28,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
+import me.prasad.compose.layouts.ui.theme.AppTheme2
 
 data class ItemState(val index: Int = 0, val color: Color)
 
@@ -41,16 +45,6 @@ fun LazyListWithState(modifier: Modifier = Modifier) {
       ItemState(color = background),
       ItemState(color = background),
       ItemState(color = background),
-      ItemState(color = background),
-      ItemState(color = background),
-      ItemState(color = background),
-      ItemState(color = background),
-      ItemState(color = background),
-      ItemState(color = background),
-      ItemState(color = background),
-      ItemState(color = background),
-      ItemState(color = background),
-      ItemState(color = background)
     )
   }
 
@@ -60,7 +54,8 @@ fun LazyListWithState(modifier: Modifier = Modifier) {
   Box(modifier = modifier.fillMaxSize()) {
     LazyColumn(
       modifier = Modifier.fillMaxSize(),
-      state = state
+      state = state,
+      verticalArrangement = TopWithFooter,
     ) {
       itemsIndexed(items) { index, item ->
         LazyListItemWithState(item = item,
@@ -86,9 +81,12 @@ fun LazyListWithState(modifier: Modifier = Modifier) {
 }
 
 @Preview
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun LazyListWithStatePreview() {
-  LazyListWithState()
+  AppTheme2 {
+    LazyListWithState()
+  }
 }
 
 @Composable
@@ -122,7 +120,31 @@ fun LazyListItemWithState(
 }
 
 @Preview(showBackground = true)
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun LazyListItemWithStatePreview() {
-  LazyListItemWithState(item = ItemState(color = MaterialTheme.colorScheme.background))
+  AppTheme2 {
+    LazyListItemWithState(item = ItemState(color = MaterialTheme.colorScheme.background))
+  }
+}
+
+
+object TopWithFooter : Arrangement.Vertical {
+  override fun Density.arrange(
+    totalSize: Int,
+    sizes: IntArray,
+    outPositions: IntArray
+  ) {
+    var y = 0
+    sizes.forEachIndexed { index, size ->
+      outPositions[index] = y
+      y += size
+    }
+
+    if (y < totalSize) {
+      val lastIndex = outPositions.lastIndex
+      outPositions[lastIndex] = totalSize - sizes.last()
+    }
+  }
+
 }
