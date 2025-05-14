@@ -10,8 +10,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import dagger.hilt.android.AndroidEntryPoint
 import me.prasad.compose.layouts.ui.screen.AnimationSample
-import me.prasad.compose.layouts.ui.screen.PhotoAlbumScreen
-import me.prasad.compose.layouts.ui.screen.TextStylingSample
 import me.prasad.compose.layouts.ui.theme.AppTheme
 
 @AndroidEntryPoint
