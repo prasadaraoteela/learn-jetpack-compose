@@ -87,16 +87,16 @@ fun AppTheme2(
     Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
       if (useDarkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
     }
+
     useDarkTheme -> DarkColors
     else -> LightColors
   }
 
   // Add primary status bar color from chosen color scheme.
-  val view = LocalView.current
-  if (!view.isInEditMode)
-
-  MaterialTheme(
-    colorScheme = colors,
-    content = content
-  )
+  if (!LocalView.current.isInEditMode) {
+    MaterialTheme(
+      colorScheme = colors,
+      content = content
+    )
+  }
 }
