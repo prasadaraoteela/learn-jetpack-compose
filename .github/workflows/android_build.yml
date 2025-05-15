@@ -1,4 +1,4 @@
-name: Android Build
+name: Android Build & Test
 
 on:
   pull_request:
@@ -11,6 +11,7 @@ on:
 jobs:
   # Job 1: Run Lint checks
   lint:
+    name: 🧹 Lint
     runs-on: macOS-latest
 
     steps:
@@ -27,15 +28,15 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
 
-      - name: Cache Gradle
-        uses: actions/cache@v3
+      - name: Cache Gradle packages
+        uses: actions/cache@v4
         with:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
-            ${{ runner.os }}-gradle-
+            gradle-${{ runner.os }}-
 
       - name: Run Lint
         # By default, ./gradlew lint will fail the build if lint issues are found.
@@ -50,6 +51,7 @@ jobs:
 
   # Job 2: Run Unit Tests (depends on Lint completing successfully)
   test:
+    name: 🧪 Unit Tests
     runs-on: macOS-latest
     needs: lint # This job will only run after the 'lint' job is successful
 
@@ -69,15 +71,15 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
 
-      - name: Cache Gradle
-        uses: actions/cache@v3
+      - name: Cache Gradle packages
+        uses: actions/cache@v4
         with:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
-            ${{ runner.os }}-gradle-
+            gradle-${{ runner.os }}-
 
       - name: Run Unit Tests
         # By default, ./gradlew test will fail the build if tests fail.
@@ -92,6 +94,7 @@ jobs:
 
   # Job 3: Build APK and Upload Artifacts (depends on Tests completing successfully)
   build-and-upload:
+    name: 🏗️ Build Debug
     runs-on: macOS-latest
     needs: test # This job will only run after the 'test' job is successful
 
@@ -111,15 +114,15 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
 
-      - name: Cache Gradle
-        uses: actions/cache@v3
+      - name: Cache Gradle packages
+        uses: actions/cache@v4
         with:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
-            ${{ runner.os }}-gradle-
+            gradle-${{ runner.os }}-
 
       - name: Build Debug APK
         run: ./gradlew :app:assembleDebug
