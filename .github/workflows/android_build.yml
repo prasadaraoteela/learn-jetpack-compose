@@ -2,11 +2,9 @@ name: Android Build & Test
 
 on:
   pull_request:
-    branches:
-      - main
+    branches: [ main ]
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   # Job 1: Run Lint checks
@@ -22,21 +20,10 @@ jobs:
         uses: actions/setup-java@v3.13.0
         with:
           distribution: "adopt"
-          java-version: "17"
-          cache: 'gradle'
+          java-version: 17
 
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
-
-      - name: Cache Gradle packages
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            gradle-${{ runner.os }}-
 
       - name: Run Lint
         # By default, ./gradlew lint will fail the build if lint issues are found.
@@ -71,16 +58,6 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
 
-      - name: Cache Gradle packages
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            gradle-${{ runner.os }}-
-
       - name: Run Unit Tests
         # By default, ./gradlew test will fail the build if tests fail.
         # This ensures the workflow exits if tests fail.
@@ -113,16 +90,6 @@ jobs:
 
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
-
-      - name: Cache Gradle packages
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            gradle-${{ runner.os }}-
 
       - name: Build Debug APK
         run: ./gradlew :app:assembleDebug
