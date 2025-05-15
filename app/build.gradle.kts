@@ -64,6 +64,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)
+    implementation(platform(libs.firebase))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
