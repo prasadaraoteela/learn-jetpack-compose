@@ -1,4 +1,4 @@
-name: Android Build & Test
+name: Android Build & Distribute
 
 on:
   pull_request:
@@ -11,7 +11,8 @@ jobs:
   lint:
     name: 🧹 Lint
     runs-on: ubuntu-latest
-
+    outputs: # Define outputs if other jobs need to know lint status (optional)
+      lint-status: ${{ job.status }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.1.0
@@ -25,8 +26,8 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
 
-      - name: Cache Gradle packages
-        uses: actions/cache@v4
+      - name: Cache Gradle
+        uses: actions/cache@v4 # Use v4 for latest features/fixes
         with:
           path: |
             ~/.gradle/caches
@@ -36,25 +37,24 @@ jobs:
             gradle-${{ runner.os }}-
 
       - name: Run Lint
-        # By default, ./gradlew lint will fail the build if lint issues are found.
-        # This ensures the workflow exits if lint fails.
         run: ./gradlew lint
 
       - name: Upload Lint Results (Optional)
+        if: always() # Upload even if lint fails to see the report
         uses: actions/upload-artifact@v4
         with:
           name: lint-results
-          path: app/build/reports/lint-results-debug.html # Adjust path as needed
+          path: app/build/reports/lint-results-debug.html
 
   # Job 2: Run Unit Tests (depends on Lint completing successfully)
   test:
     name: 🧪 Unit Tests
     runs-on: ubuntu-latest
-    needs: lint # This job will only run after the 'lint' job is successful
-
+    needs: lint
+    if: needs.lint.outputs.lint-status == 'success' || github.event_name == 'push' # Run tests if lint passed OR if it's a push to main (to always try)
+    outputs:
+      test-status: ${{ job.status }}
     steps:
-      # No need to checkout code again if you pass artifacts, but simpler to checkout for tests/lint usually.
-      # If you had a complex build artifact from 'lint' you wanted to reuse, you'd download it here.
       - name: Checkout code
         uses: actions/checkout@v4.1.0
 
@@ -67,7 +67,7 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
 
-      - name: Cache Gradle packages
+      - name: Cache Gradle
         uses: actions/cache@v4
         with:
           path: |
@@ -78,25 +78,25 @@ jobs:
             gradle-${{ runner.os }}-
 
       - name: Run Unit Tests
-        # By default, ./gradlew test will fail the build if tests fail.
-        # This ensures the workflow exits if tests fail.
         run: ./gradlew test
 
       - name: Upload Test Results (Optional)
+        if: always() # Upload even if tests fail
         uses: actions/upload-artifact@v4
         with:
           name: test-results
-          path: app/build/reports/tests/testDebugUnitTest # Adjust path as needed
+          path: app/build/reports/tests/testDebugUnitTest
 
-  # Job 3: Build APK and Upload Artifacts (depends on Tests completing successfully)
-  build-and-upload:
-    name: 🏗️ Build Debug
+  # Job 3: Build APK (depends on Tests completing successfully)
+  build-apk:
+    name: 🏗️ Build Debug APK
     runs-on: ubuntu-latest
-    needs: test # This job will only run after the 'test' job is successful
-
+    needs: test
+    if: needs.test.outputs.test-status == 'success' || github.event_name == 'push' # Run build if tests passed OR if it's a push to main
+    outputs:
+      apk-path: app/build/outputs/apk/debug/app-debug.apk
+      apk-name: app-debug.apk
     steps:
-      # No need to checkout code again if you pass artifacts, but simpler to checkout for tests/lint usually.
-      # If you had a complex build artifact from 'test' you wanted to reuse, you'd download it here.
       - name: Checkout code
         uses: actions/checkout@v4.1.0
 
@@ -109,7 +109,7 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
 
-      - name: Cache Gradle packages
+      - name: Cache Gradle
         uses: actions/cache@v4
         with:
           path: |
@@ -122,16 +122,43 @@ jobs:
       - name: Build Debug APK
         run: ./gradlew :app:assembleDebug
 
-      - name: Upload Debug APK Artifact
+      # Upload the APK as an artifact so the 'distribute' job can access it
+      - name: Upload Debug APK for Distribution
         uses: actions/upload-artifact@v4
         with:
-          name: app-debug-apk
+          name: app-debug-apk-for-distribution # Unique name for this artifact
           path: app/build/outputs/apk/debug/app-debug.apk
 
-      - name: upload artifact to Firebase App Distribution
-        uses: wzieba/Firebase-Distribution-Github-Action@v1
+  # Job 4: Distribute APK to Firebase (depends on APK build completing successfully)
+  distribute-apk:
+    name: 🚀 Distribute to Firebase
+    runs-on: ubuntu-latest
+    needs: build-apk
+    # Only run distribution for pushes to main, or if specifically triggered (add other conditions if needed)
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.build-apk.outputs.apk-path != ''
+
+    steps:
+      # No need to checkout code here if the APK is the only thing needed
+
+      - name: Set up JDK 17 (may not be strictly needed if not running gradle, but good practice)
+        uses: actions/setup-java@v3.13.0
+        with:
+          distribution: "adopt"
+          java-version: "17"
+
+      # Download the APK artifact built in the 'build-apk' job
+      - name: Download Debug APK for Distribution
+        uses: actions/download-artifact@v4
+        with:
+          name: app-debug-apk-for-distribution
+          path: build/apk/ # Download it to a specific path
+
+      - name: Distribute to Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1.7.0 # Use a specific version
         with:
           appId: ${{secrets.FIREBASE_APP_ID}}
           serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
           groups: testers
-          file: app/build/outputs/apk/debug/app-debug.apk
+          file: build/apk/app-debug.apk # Path to the downloaded APK
+          # Optional: Add release notes
+          # releaseNotes: "Build ${{ github.run_number }} - ${{ github.sha }}"
