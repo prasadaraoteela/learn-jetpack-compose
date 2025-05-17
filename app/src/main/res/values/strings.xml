@@ -18,4 +18,6 @@
     <string name="bottom_navigation_home">Home</string>
     <string name="bottom_navigation_profile">Profile</string>
     <string name="placeholder_search">Search</string>
+    <string name="cash_flow_view_title">Cash Flow View</string>
+    <string name="cash_flow_view_description">Get a clear picture of your finances with Cash Flow View! Track your income and expenses, identify spending patterns, and make informed financial decisions.</string>
 </resources>

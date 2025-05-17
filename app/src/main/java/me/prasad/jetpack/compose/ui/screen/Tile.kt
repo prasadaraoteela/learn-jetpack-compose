@@ -14,8 +14,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import me.prasad.jetpack.compose.R
 import me.prasad.jetpack.compose.data.model.Tile
 import me.prasad.jetpack.compose.ui.theme.Typography
 
@@ -59,8 +61,8 @@ fun Tile(tile: Tile, modifier: Modifier = Modifier) {
 private fun TilePreview() {
   Tile(
     tile = Tile(
-      title = "Cash Flow View",
-      description = "Get a clear picture of your finances with Cash Flow View! Track your income and expenses, identify spending patterns, and make informed financial decisions.",
+      title = stringResource(R.string.cash_flow_view_title),
+      description = stringResource(R.string.cash_flow_view_description),
       icon = Icons.Rounded.Home
     )
   )

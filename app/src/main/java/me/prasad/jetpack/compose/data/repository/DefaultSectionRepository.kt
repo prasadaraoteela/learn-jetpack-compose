@@ -23,12 +23,16 @@ class DefaultSectionRepository @Inject constructor() : SectionRepository {
       tiles = listOf(
         Tile(
           title = "Cash Flow View",
-          description = "Get a clear picture of your finances with Cash Flow View! Track your income and expenses, identify spending patterns, and make informed financial decisions.",
+          description = "Get a clear picture of your finances with Cash Flow View! " +
+              "Track your income and expenses, identify spending patterns, " +
+              "and make informed financial decisions.",
           icon = Icons.Rounded.Home
         ),
         Tile(
           title = "Cash Flow View",
-          description = "Get a clear picture of your finances with Cash Flow View! Track your income and expenses, identify spending patterns, and make informed financial decisions.",
+          description = "Get a clear picture of your finances with Cash Flow View! " +
+              "Track your income and expenses, identify spending patterns, " +
+              "and make informed financial decisions.",
           icon = Icons.Rounded.Home
         )
       )
