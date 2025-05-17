@@ -1,7 +1,7 @@
 # 🚀 My Android App
 
-[![CI Build](https://github.com/prasadaraoteela/learn-jetpack-compose/actions/workflows/android-ci.yml/badge.svg)](https://github.com/prasadaraoteela/learn-jetpack-compose/actions/workflows/android-ci.yml)
-[![Code Style - Detekt](https://github.com/prasadaraoteela/learn-jetpack-compose/actions/workflows/detekt.yml/badge.svg)](https://github.com/prasadaraoteela/learn-jetpack-compose/actions/workflows/detekt.yml)
+[![Android Build](https://github.com/prasadaraoteela/learn-jetpack-compose/actions/workflows/android_build.yml/badge.svg)](https://github.com/prasadaraoteela/learn-jetpack-compose/actions/workflows/android_build.yml)
+[![Security Checks](https://github.com/prasadaraoteela/learn-jetpack-compose/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/prasadaraoteela/learn-jetpack-compose/actions/workflows/github-code-scanning/codeql)
 
 An Android app built with **Jetpack Compose**, **Kotlin**, and **MVVM**, featuring automated checks using **GitHub Actions**.
 
