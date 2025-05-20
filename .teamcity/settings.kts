@@ -78,6 +78,8 @@ object AndroidBuild : BuildType({
 object AndroidCompile : BuildType({
     name = "android-compile"
 
+    artifactRules = "app/build/outputs/apk/debug/app-debug.apk => apk"
+
     vcs {
         root(DslContext.settingsRoot)
     }
