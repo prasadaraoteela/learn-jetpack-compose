@@ -1,5 +1,6 @@
 import jetbrains.buildServer.configs.kotlin.*
 import jetbrains.buildServer.configs.kotlin.buildSteps.gradle
+import jetbrains.buildServer.configs.kotlin.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.triggers.vcs
 
 /*
@@ -129,6 +130,17 @@ object AndroidUiTests : BuildType({
             name = "🧪 UI Tests"
             id = "UI_Tests"
             tasks = "connectedDebugAndroidTest"
+        }
+        script {
+            name = "Start Android Emulator"
+            id = "Start_Android_Emulator"
+            scriptContent = """
+                #!/bin/bash
+                echo "Starting Android Emulator..."
+                ${'$'}ANDROID_HOME/emulator/emulator -avd Pixel_API_30 -no-window
+                adb wait-for-device
+                adb shell input keyevent 82
+            """.trimIndent()
         }
     }
 })
