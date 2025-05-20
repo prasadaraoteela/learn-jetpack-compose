@@ -124,4 +124,10 @@ object AndroidUnitTests : BuildType({
             tasks = "testDebugUnitTest"
         }
     }
+
+    dependencies {
+        snapshot(AndroidLintCheck) {
+            onDependencyFailure = FailureAction.FAIL_TO_START
+        }
+    }
 })
