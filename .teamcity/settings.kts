@@ -132,7 +132,7 @@ object AndroidUiTests : BuildType({
             scriptContent = """
                 #!/bin/bash
                 echo "Starting Android Emulator..."
-                ${'$'}ANDROID_HOME/emulator/emulator -avd Pixel_API_30 -no-window
+                ${'$'}ANDROID_HOME/emulator/emulator -avd Medium_Phone_API_35 -no-window
                 adb wait-for-device
                 adb shell input keyevent 82
             """.trimIndent()
