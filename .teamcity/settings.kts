@@ -119,6 +119,10 @@ object AndroidLintCheck : BuildType({
 
 object AndroidUiTests : BuildType({
     name = "android-ui-tests"
+
+    vcs {
+        root(DslContext.settingsRoot)
+    }
 })
 
 object AndroidUnitTests : BuildType({
