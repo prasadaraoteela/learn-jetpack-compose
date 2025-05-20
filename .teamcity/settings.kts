@@ -32,6 +32,7 @@ project {
     buildType(AndroidBuild)
     buildType(AndroidUnitTests)
     buildType(AndroidCompile)
+    buildType(AndroidUiTests)
 }
 
 object AndroidBuild : BuildType({
@@ -114,6 +115,10 @@ object AndroidLintCheck : BuildType({
             tasks = "lint"
         }
     }
+})
+
+object AndroidUiTests : BuildType({
+    name = "android-ui-tests"
 })
 
 object AndroidUnitTests : BuildType({
