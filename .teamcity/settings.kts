@@ -79,4 +79,12 @@ object AndroidCompile : BuildType({
     vcs {
         root(DslContext.settingsRoot)
     }
+
+    steps {
+        gradle {
+            name = "🏗️ Build Debug APK"
+            id = "Build_Debug_APK"
+            tasks = ":app:clean :app:assembleDebug"
+        }
+    }
 })
