@@ -29,6 +29,7 @@ version = "2025.03"
 project {
 
     buildType(AndroidBuild)
+    buildType(AndroidUnitTests)
     buildType(AndroidCompile)
 }
 
@@ -87,4 +88,8 @@ object AndroidCompile : BuildType({
             tasks = ":app:clean :app:assembleDebug"
         }
     }
+})
+
+object AndroidUnitTests : BuildType({
+    name = "android-unit-tests"
 })
