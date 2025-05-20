@@ -92,4 +92,8 @@ object AndroidCompile : BuildType({
 
 object AndroidUnitTests : BuildType({
     name = "android-unit-tests"
+
+    vcs {
+        root(DslContext.settingsRoot)
+    }
 })
