@@ -126,11 +126,6 @@ object AndroidUiTests : BuildType({
     }
 
     steps {
-        gradle {
-            name = "🧪 UI Tests"
-            id = "UI_Tests"
-            tasks = "connectedDebugAndroidTest"
-        }
         script {
             name = "Start Android Emulator"
             id = "Start_Android_Emulator"
@@ -141,6 +136,11 @@ object AndroidUiTests : BuildType({
                 adb wait-for-device
                 adb shell input keyevent 82
             """.trimIndent()
+        }
+        gradle {
+            name = "🧪 UI Tests"
+            id = "UI_Tests"
+            tasks = "connectedDebugAndroidTest"
         }
     }
 })
