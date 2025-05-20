@@ -93,6 +93,10 @@ object AndroidCompile : BuildType({
 
 object AndroidLintCheck : BuildType({
     name = "android-lint-check"
+
+    vcs {
+        root(DslContext.settingsRoot)
+    }
 })
 
 object AndroidUnitTests : BuildType({
