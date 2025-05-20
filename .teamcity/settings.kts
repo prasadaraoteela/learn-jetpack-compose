@@ -29,6 +29,7 @@ version = "2025.03"
 project {
 
     buildType(AndroidBuild)
+    buildType(AndroidCompile)
 }
 
 object AndroidBuild : BuildType({
@@ -70,4 +71,8 @@ object AndroidBuild : BuildType({
             branchFilter = ""
         }
     }
+})
+
+object AndroidCompile : BuildType({
+    name = "android-compile"
 })
