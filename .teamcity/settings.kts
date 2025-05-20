@@ -96,4 +96,12 @@ object AndroidUnitTests : BuildType({
     vcs {
         root(DslContext.settingsRoot)
     }
+
+    steps {
+        gradle {
+            name = "🧪 Unit Tests"
+            id = "Unit_Tests"
+            tasks = "testDebugUnitTest"
+        }
+    }
 })
