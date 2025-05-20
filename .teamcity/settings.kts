@@ -97,6 +97,14 @@ object AndroidLintCheck : BuildType({
     vcs {
         root(DslContext.settingsRoot)
     }
+
+    steps {
+        gradle {
+            name = "🧹 Lint"
+            id = "Lint"
+            tasks = "lint"
+        }
+    }
 })
 
 object AndroidUnitTests : BuildType({
