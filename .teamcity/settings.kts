@@ -75,4 +75,8 @@ object AndroidBuild : BuildType({
 
 object AndroidCompile : BuildType({
     name = "android-compile"
+
+    vcs {
+        root(DslContext.settingsRoot)
+    }
 })
