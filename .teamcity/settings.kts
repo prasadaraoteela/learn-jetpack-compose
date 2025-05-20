@@ -123,6 +123,14 @@ object AndroidUiTests : BuildType({
     vcs {
         root(DslContext.settingsRoot)
     }
+
+    steps {
+        gradle {
+            name = "🧪 UI Tests"
+            id = "UI_Tests"
+            tasks = "connectedDebugAndroidTest"
+        }
+    }
 })
 
 object AndroidUnitTests : BuildType({
