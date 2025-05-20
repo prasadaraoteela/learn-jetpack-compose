@@ -28,6 +28,7 @@ version = "2025.03"
 
 project {
 
+    buildType(AndroidLintCheck)
     buildType(AndroidBuild)
     buildType(AndroidUnitTests)
     buildType(AndroidCompile)
@@ -88,6 +89,10 @@ object AndroidCompile : BuildType({
             tasks = ":app:clean :app:assembleDebug"
         }
     }
+})
+
+object AndroidLintCheck : BuildType({
+    name = "android-lint-check"
 })
 
 object AndroidUnitTests : BuildType({
