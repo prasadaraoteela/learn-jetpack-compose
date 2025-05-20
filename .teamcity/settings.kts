@@ -92,6 +92,12 @@ object AndroidCompile : BuildType({
             tasks = ":app:clean :app:assembleDebug"
         }
     }
+
+    dependencies {
+        snapshot(AndroidUnitTests) {
+            onDependencyFailure = FailureAction.FAIL_TO_START
+        }
+    }
 })
 
 object AndroidLintCheck : BuildType({
