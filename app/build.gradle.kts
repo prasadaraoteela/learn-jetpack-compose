@@ -10,12 +10,12 @@ plugins {
 
 android {
     namespace = "me.prasad.jetpack.compose"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "me.prasad.jetpack.compose"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -45,7 +45,6 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.14"
     }
     packaging {
         resources {
