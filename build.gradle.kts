@@ -8,4 +8,5 @@ plugins {
     alias(libs.plugins.navigation.safeargs) apply false
     alias(libs.plugins.google.services) apply false
     alias(libs.plugins.detekt) apply false
+    alias(libs.plugins.compose.compiler) apply false
 }

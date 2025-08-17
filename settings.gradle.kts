@@ -26,3 +26,4 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 rootProject.name = "learn-jetpack-compose"
 include(":app")
 include(":core:network")
+include(":movies")

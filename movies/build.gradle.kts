@@ -1,4 +1,5 @@
 import io.gitlab.arturbosch.detekt.Detekt
+import org.gradle.kotlin.dsl.withType
 
 plugins {
   alias(libs.plugins.android.application)
@@ -10,34 +11,28 @@ plugins {
 }
 
 android {
-  namespace = "me.prasad.jetpack.compose"
-  compileSdk = 35
+  namespace = "me.prasad.movies"
+  compileSdk = 36
 
   defaultConfig {
-    applicationId = "me.prasad.jetpack.compose"
+    applicationId = "me.prasad.movies"
     minSdk = 24
     targetSdk = 35
     versionCode = 1
     versionName = "1.0"
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    vectorDrawables {
-      useSupportLibrary = true
-    }
   }
 
   buildTypes {
     release {
       isMinifyEnabled = false
-      proguardFiles(
-        getDefaultProguardFile("proguard-android-optimize.txt"),
-        "proguard-rules.pro"
-      )
+      proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
     }
   }
   compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
   }
   buildFeatures {
     compose = true
@@ -74,6 +69,6 @@ dependencies {
   debugImplementation(libs.androidx.ui.test.manifest)
 }
 
-tasks.withType<Detekt>().configureEach {
-  jvmTarget = "17"
-}
+//tasks.withType<Detekt>().configureEach {
+//  jvmTarget = "17"
+//}
