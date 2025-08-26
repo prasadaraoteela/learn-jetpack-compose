@@ -1,6 +1,3 @@
-import io.gitlab.arturbosch.detekt.Detekt
-import org.gradle.kotlin.dsl.withType
-
 plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.kotlin.android)
@@ -8,6 +5,7 @@ plugins {
   alias(libs.plugins.kotlin.ksp)
   alias(libs.plugins.detekt)
   alias(libs.plugins.compose.compiler)
+  alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -59,6 +57,15 @@ dependencies {
   ksp(libs.hilt.compiler)
   implementation(platform(libs.firebase))
 
+  // Navigation3 dependencies
+  implementation(libs.androidx.navigation3.ui)
+  implementation(libs.androidx.navigation3.runtime)
+  implementation(libs.androidx.lifecycle.viewmodel.navigation3)
+  implementation(libs.androidx.material3.adaptive)
+  implementation(libs.androidx.material3.adaptive.layout)
+  implementation(libs.androidx.material3.adaptive.navigation)
+  implementation(libs.kotlinx.serialization.core)
+
   // Testing dependencies
   testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.junit)
@@ -68,7 +75,3 @@ dependencies {
   debugImplementation(libs.androidx.ui.tooling)
   debugImplementation(libs.androidx.ui.test.manifest)
 }
-
-//tasks.withType<Detekt>().configureEach {
-//  jvmTarget = "17"
-//}

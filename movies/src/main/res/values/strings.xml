@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Movies</string>
+
+    <!-- Buttons -->
+    <string name="home">Home</string>
+    <string name="details">Movie Details</string>
 </resources>
