@@ -27,3 +27,6 @@ rootProject.name = "learn-jetpack-compose"
 include(":app")
 include(":core:network")
 include(":movies")
+include(":feature:home")
+include(":feature:profile")
+include(":core:navigation")

@@ -18,6 +18,7 @@ material = "1.12.0"
 google-services = "4.4.3"
 firebase = "34.1.0"
 detekt = "1.23.8"
+hiltCompose = "1.2.0"
 
 # Navigation3 library
 nav3Core = "1.0.0-alpha07"
@@ -52,6 +53,7 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 
 hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+hilt-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltCompose" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-gson-converter = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
@@ -84,5 +86,5 @@ navigation-safeargs = { id = "androidx.navigation.safeargs.kotlin", version.ref 
 google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization"}
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization" }
 

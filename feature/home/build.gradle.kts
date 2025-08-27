@@ -1,5 +1,5 @@
 plugins {
-  alias(libs.plugins.android.application)
+  alias(libs.plugins.android.library)
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.hilt)
   alias(libs.plugins.kotlin.ksp)
@@ -9,17 +9,14 @@ plugins {
 }
 
 android {
-  namespace = "me.prasad.movies"
+  namespace = "com.movies.home"
   compileSdk = 36
 
   defaultConfig {
-    applicationId = "me.prasad.movies"
     minSdk = 24
-    targetSdk = 35
-    versionCode = 1
-    versionName = "1.0"
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    consumerProguardFiles("consumer-rules.pro")
   }
 
   buildTypes {
@@ -55,7 +52,6 @@ dependencies {
   implementation(libs.androidx.lifecycle.viewmodel.compose)
   implementation(libs.hilt)
   ksp(libs.hilt.compiler)
-  implementation(libs.hilt.compose)
   implementation(platform(libs.firebase))
 
   // Navigation3 dependencies
@@ -69,10 +65,6 @@ dependencies {
 
   // Core dependencies
   implementation(projects.core.navigation)
-
-  // Feature dependencies
-  implementation(projects.feature.home)
-  implementation(projects.feature.profile)
 
   // Testing dependencies
   testImplementation(libs.junit)
