@@ -6,10 +6,11 @@ import com.movies.core.navigation.Navigator
 import com.movies.home.navigation.HomeDestination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlin.jvm.JvmSuppressWildcards
 
 @HiltViewModel
 class DynamicNavigationViewModel @Inject constructor(
-  val entries: Set<FeatureNavEntry>
+  val entries: @JvmSuppressWildcards Set<FeatureNavEntry>
 ) : ViewModel() {
 
   val navigator = Navigator().apply {
