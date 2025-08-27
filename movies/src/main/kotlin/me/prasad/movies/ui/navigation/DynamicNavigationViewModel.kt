@@ -1,6 +1,5 @@
 package me.prasad.movies.ui.navigation
 
-import androidx.compose.runtime.Composable
 import androidx.lifecycle.ViewModel
 import com.movies.core.navigation.AppDestination
 import com.movies.core.navigation.FeatureNavEntry
@@ -18,7 +17,9 @@ class DynamicNavigationViewModel @Inject constructor(
   val backstack: List<AppDestination> = navigator.backstack
 
   init {
-    navigator.push(HomeDestination.Home)
+    if (backstack.lastOrNull() !is HomeDestination.Home) {
+      navigator.push(HomeDestination.Home)
+    }
   }
 
   fun push(destination: AppDestination) {
@@ -29,10 +30,9 @@ class DynamicNavigationViewModel @Inject constructor(
     navigator.pop()
   }
 
-  @Composable
-  fun Render(destination: AppDestination) {
+  fun handler(destination: AppDestination): FeatureNavEntry<*> {
     val handler = entries.firstOrNull { it.canHandle(destination) }
     checkNotNull(handler) { "No handler found for $destination" }
-    handler.Render(destination, navigator)
+    return handler
   }
 }

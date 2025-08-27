@@ -30,7 +30,8 @@ fun AppNavigationDynamic(
     entryProvider = entryProvider {
       backstack.forEach { destination ->
         entry(key = destination) {
-          navigationViewModel.Render(destination)
+          navigationViewModel.handler(destination)
+            .Render(destination, navigationViewModel.navigator)
         }
       }
     }
