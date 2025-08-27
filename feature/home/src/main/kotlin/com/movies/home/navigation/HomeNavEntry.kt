@@ -10,13 +10,13 @@ import javax.inject.Inject
 
 class HomeNavEntry @Inject constructor(
   private val profileNavigator: ProfileNavigator
-) : FeatureNavEntry {
+) : FeatureNavEntry<HomeDestination> {
 
   override fun canHandle(destination: AppDestination): Boolean = destination is HomeDestination
 
   @Composable
   override fun Render(
-    destination: AppDestination,
+    destination: HomeDestination,
     navigator: Navigator
   ) {
     when (destination) {

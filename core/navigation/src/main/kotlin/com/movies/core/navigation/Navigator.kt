@@ -1,8 +1,11 @@
 package com.movies.core.navigation
 
 import androidx.compose.runtime.mutableStateListOf
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class Navigator {
+@Singleton
+class Navigator @Inject constructor() {
   val backstack = mutableStateListOf<AppDestination>()
 
   fun push(destination: AppDestination) {

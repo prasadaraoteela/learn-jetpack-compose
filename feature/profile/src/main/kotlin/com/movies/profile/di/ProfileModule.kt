@@ -17,7 +17,7 @@ abstract class ProfileModule {
 
   @Binds
   @IntoSet
-  abstract fun bindProfileEntry(entry: ProfileNavEntry): FeatureNavEntry
+  abstract fun bindProfileEntry(entry: ProfileNavEntry): FeatureNavEntry<*>
 
   @Binds
   @Singleton
