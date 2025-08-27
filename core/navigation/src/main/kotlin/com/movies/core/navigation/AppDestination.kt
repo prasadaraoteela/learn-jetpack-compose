@@ -1,3 +1,5 @@
 package com.movies.core.navigation
 
-interface AppDestination
+import androidx.navigation3.runtime.NavKey
+
+interface AppDestination: NavKey
