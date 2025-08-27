@@ -1,7 +1,7 @@
 package com.movies.profile.di
 
 import androidx.navigation3.runtime.entry
-import com.movies.core.navigation.EntryProviderInstaller
+import com.movies.core.navigation.NavEntryPoint
 import com.movies.core.navigation.Navigator
 import com.movies.core.navigation.profile.ProfileNavigator
 import com.movies.profile.navigation.DefaultProfileNavigator
@@ -19,7 +19,7 @@ import dagger.multibindings.IntoSet
 object ProfileModule {
   @Provides
   @IntoSet
-  fun provideProfileEntry(navigator: Navigator): EntryProviderInstaller = {
+  fun provideProfileEntry(navigator: Navigator): NavEntryPoint = {
     entry<ProfileDestination.Profile> { profile ->
       ProfileScreen(profile.userId) {
         navigator.goBack()

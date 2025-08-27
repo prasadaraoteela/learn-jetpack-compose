@@ -5,12 +5,18 @@ import androidx.navigation3.runtime.EntryProviderBuilder
 import dagger.hilt.android.scopes.ActivityRetainedScoped
 import javax.inject.Inject
 
-typealias EntryProviderInstaller = EntryProviderBuilder<AppDestination>.() -> Unit
+typealias NavEntryPoint = EntryProviderBuilder<AppDestination>.() -> Unit
 
 @ActivityRetainedScoped
 class Navigator @Inject constructor() {
+
   private val _backstack = mutableStateListOf<AppDestination>()
   val backstack: List<AppDestination> = _backstack
+
+  fun setup(startDestination: AppDestination) {
+    _backstack.clear()
+    _backstack.add(startDestination)
+  }
 
   fun navigate(destination: AppDestination) {
     _backstack.add(destination)
