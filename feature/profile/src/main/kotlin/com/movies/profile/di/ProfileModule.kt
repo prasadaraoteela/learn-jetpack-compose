@@ -13,13 +13,13 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class ProfileModule {
+interface ProfileModule {
 
   @Binds
   @IntoSet
-  abstract fun bindProfileEntry(entry: ProfileNavEntry): FeatureNavEntry<*>
+  fun bindProfileEntry(entry: ProfileNavEntry): FeatureNavEntry<*>
 
   @Binds
   @Singleton
-  abstract fun bindProfileNavigator(navigator: DefaultProfileNavigator): ProfileNavigator
+  fun bindProfileNavigator(navigator: DefaultProfileNavigator): ProfileNavigator
 }

@@ -1,6 +1,5 @@
 package com.movies.home.di
 
-import com.movies.core.navigation.AppDestination
 import com.movies.core.navigation.FeatureNavEntry
 import com.movies.home.navigation.HomeNavEntry
 import dagger.Binds
@@ -11,9 +10,9 @@ import dagger.multibindings.IntoSet
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class HomeModule {
+interface HomeModule {
 
   @Binds
   @IntoSet
-  abstract fun bindHomeNavEntry(entry: HomeNavEntry): FeatureNavEntry<*>
+  fun bindHomeNavEntry(entry: HomeNavEntry): FeatureNavEntry<*>
 }
