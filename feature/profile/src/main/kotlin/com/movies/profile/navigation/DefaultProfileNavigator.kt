@@ -9,6 +9,6 @@ class DefaultProfileNavigator @Inject constructor() : ProfileNavigator {
     userId: String,
     navigator: Navigator
   ) {
-    navigator.push(ProfileDestination.Profile(userId))
+    navigator.navigate(ProfileDestination.Profile(userId))
   }
 }

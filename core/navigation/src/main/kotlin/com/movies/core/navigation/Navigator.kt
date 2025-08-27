@@ -1,26 +1,29 @@
 package com.movies.core.navigation
 
 import androidx.compose.runtime.mutableStateListOf
+import androidx.navigation3.runtime.EntryProviderBuilder
+import dagger.hilt.android.scopes.ActivityRetainedScoped
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
+typealias EntryProviderInstaller = EntryProviderBuilder<AppDestination>.() -> Unit
+
+@ActivityRetainedScoped
 class Navigator @Inject constructor() {
   private val _backstack = mutableStateListOf<AppDestination>()
   val backstack: List<AppDestination> = _backstack
 
-  fun push(destination: AppDestination) {
+  fun navigate(destination: AppDestination) {
     _backstack.add(destination)
   }
 
-  fun pop(): Boolean = _backstack.removeLastOrNull()?.let { true } ?: false
+  fun goBack(): Boolean = _backstack.removeLastOrNull()?.let { true } ?: false
 
-  fun popToRoot() {
+  fun clearBackstack() {
     if (_backstack.size <= 1) return
     _backstack.subList(1, _backstack.size).clear()
   }
 
-  fun popTo(destination: AppDestination) {
+  fun navigateUpTo(destination: AppDestination) {
     if (_backstack.isEmpty()) return
     val index = _backstack.indexOfFirst { it == destination }
     if (index == -1) return

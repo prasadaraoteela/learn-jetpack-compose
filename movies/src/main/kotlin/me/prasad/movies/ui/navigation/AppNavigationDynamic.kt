@@ -2,38 +2,32 @@ package me.prasad.movies.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
-import androidx.navigation3.runtime.entry
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberSavedStateNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import androidx.navigation3.ui.rememberSceneSetupNavEntryDecorator
+import com.movies.core.navigation.EntryProviderInstaller
+import com.movies.core.navigation.Navigator
 
 @Composable
 fun AppNavigationDynamic(
   modifier: Modifier, // modifier parameter was already here
-  navigationViewModel: DynamicNavigationViewModel = hiltViewModel()
+  navigator: Navigator,
+  entries: Set<EntryProviderInstaller>,
 ) {
-
-  val backstack = navigationViewModel.backstack
 
   NavDisplay(
     modifier = modifier, // Apply the modifier here
-    backStack = backstack,
-    onBack = { navigationViewModel.pop() },
+    backStack = navigator.backstack,
+    onBack = { navigator.goBack() },
     entryDecorators = listOf(
       rememberSceneSetupNavEntryDecorator(),
       rememberSavedStateNavEntryDecorator(),
       rememberViewModelStoreNavEntryDecorator(),
     ),
     entryProvider = entryProvider {
-      backstack.forEach { destination ->
-        entry(key = destination) {
-          navigationViewModel.handler(destination)
-            .Render(destination, navigationViewModel.navigator)
-        }
-      }
+      entries.forEach { entry -> this.entry() }
     }
   )
 }

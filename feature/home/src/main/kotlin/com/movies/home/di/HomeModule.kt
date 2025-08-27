@@ -1,18 +1,30 @@
 package com.movies.home.di
 
-import com.movies.core.navigation.FeatureNavEntry
-import com.movies.home.navigation.HomeNavEntry
-import dagger.Binds
+import androidx.navigation3.runtime.entry
+import com.movies.core.navigation.EntryProviderInstaller
+import com.movies.core.navigation.Navigator
+import com.movies.core.navigation.profile.ProfileNavigator
+import com.movies.home.navigation.HomeDestination
+import com.movies.home.ui.HomeScreen
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
+import dagger.hilt.android.components.ActivityRetainedComponent
 import dagger.multibindings.IntoSet
 
 @Module
-@InstallIn(SingletonComponent::class)
-interface HomeModule {
-
-  @Binds
+@InstallIn(ActivityRetainedComponent::class)
+object HomeModule {
+  @Provides
   @IntoSet
-  fun bindHomeNavEntry(entry: HomeNavEntry): FeatureNavEntry<*>
+  fun provideHomeMainEntry(
+    navigator: Navigator,
+    profileNavigator: ProfileNavigator
+  ): EntryProviderInstaller = {
+    entry<HomeDestination.Home> {
+      HomeScreen { userId ->
+        profileNavigator.openProfile(userId = userId, navigator = navigator)
+      }
+    }
+  }
 }
