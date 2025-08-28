@@ -9,7 +9,7 @@ plugins {
 }
 
 android {
-  namespace = "com.movies.home"
+  namespace = "core.design"
   compileSdk = 36
 
   defaultConfig {
@@ -52,7 +52,6 @@ dependencies {
   implementation(libs.androidx.lifecycle.viewmodel.compose)
   implementation(libs.hilt)
   ksp(libs.hilt.compiler)
-  implementation(libs.hilt.compose)
   implementation(platform(libs.firebase))
 
   // Navigation3 dependencies
@@ -63,10 +62,6 @@ dependencies {
   implementation(libs.androidx.material3.adaptive.layout)
   implementation(libs.androidx.material3.adaptive.navigation)
   implementation(libs.kotlinx.serialization.core)
-
-  // Core dependencies
-  implementation(projects.core.navigation)
-  implementation(projects.core.design)
 
   // Testing dependencies
   testImplementation(libs.junit)

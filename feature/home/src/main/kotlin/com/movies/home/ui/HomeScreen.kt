@@ -9,15 +9,18 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(gotoProfile: (userId: String) -> Unit) {
+fun HomeScreen(
+  viewModel: HomeViewModel = hiltViewModel()
+) {
   Scaffold(
     topBar = { TopAppBar(title = { Text("Home") }) }
   ) { padding ->
     Button(
-      onClick = { gotoProfile("123") },
+      onClick = { viewModel.gotoProfile("12345") },
       modifier = Modifier
         .padding(padding)
         .padding(16.dp)

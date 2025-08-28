@@ -28,7 +28,8 @@ fun AppNavigation(modifier: Modifier = Modifier) {
     entryProvider = entryProvider {
       entry<Screen.Home> {
         HomeScreen(modifier) {
-          viewModel.addScreen(Screen.Details("123"))
+//          viewModel.addScreen(Screen.Details("123"))
+          viewModel.onDeleteItem()
         }
       }
       entry<Screen.Details> { key ->

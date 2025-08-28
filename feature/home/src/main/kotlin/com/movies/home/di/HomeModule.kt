@@ -2,7 +2,6 @@ package com.movies.home.di
 
 import androidx.navigation3.runtime.entry
 import com.movies.core.navigation.NavEntryPoint
-import com.movies.core.navigation.Navigator
 import com.movies.core.navigation.profile.ProfileNavigator
 import com.movies.home.navigation.HomeDestination
 import com.movies.home.ui.HomeScreen
@@ -18,13 +17,10 @@ object HomeModule {
   @Provides
   @IntoSet
   fun provideHomeMainEntry(
-    navigator: Navigator,
     profileNavigator: ProfileNavigator
   ): NavEntryPoint = {
     entry<HomeDestination.Home> {
-      HomeScreen { userId ->
-        profileNavigator.openProfile(userId = userId, navigator = navigator)
-      }
+      HomeScreen()
     }
   }
 }

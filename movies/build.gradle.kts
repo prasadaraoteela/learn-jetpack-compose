@@ -69,6 +69,7 @@ dependencies {
 
   // Core dependencies
   implementation(projects.core.navigation)
+  implementation(projects.core.design)
 
   // Feature dependencies
   implementation(projects.feature.home)
